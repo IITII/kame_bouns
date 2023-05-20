@@ -79,7 +79,7 @@ async function task() {
         let newBouns = bouns.filter(b => !oldJson.some(o => o.title === b.title))
         for (const n of newBouns) {
             console.log(bouns);
-            let msg = `#名称 _${n.title}_\n#价格 ${n.price}\n${n.desc} ![img](${n.img})`
+            let msg = `#名称 _${n.title}_\n#价格 ${n.price}\n${n.desc} ${n.img}`
             await tgNotify(msg)
             await sleep(1000)
         }
