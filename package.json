@@ -1,0 +1,27 @@
+{
+  "name": "kame_bouns",
+  "version": "1.0.0",
+  "description": "获取并推送 kame 勋章",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IITII/nexusphp_forums.git"
+  },
+  "keywords": [
+    "kame"
+  ],
+  "author": "IITII <ccmejx@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IITII/nexusphp_forums/issues"
+  },
+  "homepage": "https://github.com/IITII/nexusphp_forums#readme",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cheerio": "^1.0.0-rc.12",
+    "dayjs": "^1.11.7"
+  }
+}
