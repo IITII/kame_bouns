@@ -37,7 +37,7 @@ function loadJson() {
     let res = []
     if (fs.existsSync(file)) {
         try {
-            res = require(file)
+            res = JSON.parse(fs.readFileSync(file))
         } catch (e) {
             console.log(`read failed: ${file}`);
         }
