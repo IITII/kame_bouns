@@ -21,7 +21,9 @@
   "homepage": "https://github.com/IITII/nexusphp_forums#readme",
   "dependencies": {
     "axios": "^1.4.0",
+    "axios-debug-log": "^1.0.0",
     "cheerio": "^1.0.0-rc.12",
+    "cloudscraper": "^4.6.0",
     "dayjs": "^1.11.7"
   }
 }

@@ -8,23 +8,30 @@ const config = require('./config/config'),
     { load } = require('cheerio'),
     node_url = require('url'),
     fs = require('fs'),
-    path = require('path')
-
+    path = require('path'),
+    cloudscraper = require('cloudscraper')
 
 const url = 'https://kamept.com/mybonus.php'
 const file = path.resolve(__dirname, './cache.json')
 
 async function getDom() {
-    return await axios.get(url, {
-        responseType: 'document',
+    return await cloudscraper({
+        uri: url,
         headers: {
-            'referer': url,
-            Host: new URL(url).host,
-            Connection: 'keep-alive',
             Cookie: config.cookies,
-        },
+        }
     })
-        .then(res => load(res?.data))
+    // return await axios.get(url, {
+    //     responseType: 'document',
+    //     headers: {
+    //         'referer': url,
+    //         Host: new URL(url).host,
+    //         Connection: 'keep-alive',
+    //         Cookie: config.cookies,
+    //     },
+    // })
+        // .then(res => {return load(res?.data)})
+        .then(res => {return load(res)})
         .then($ => {
             if ($.text().includes('未登录')) {
                 throw new Error('Cookies 过期')
@@ -58,7 +65,7 @@ async function tgNotify(text) {
     }
     axios.post(`https://api.telegram.org/bot${config.tg.token}/sendMessage`, params)
     .then(_ => console.log(`sent: ${text}`))
-    .catch(e => console.log(e.message))
+    .catch(e => console.log(`tgNotify: ${e.message}`))
 }
 
 async function task() {
@@ -85,6 +92,7 @@ async function task() {
         }
         saveJson(bouns)
     }).catch(async e => {
+        console.log(`task: ${e.message}`)
         await tgNotify(e.message)
         await sleep(1000)
     })

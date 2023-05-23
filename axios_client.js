@@ -10,6 +10,7 @@ const Axios = require('axios'),
 //   jar = new CookieJar(),
 //   axios = Axios.create(axiosConf)
 
+require('axios-debug-log/enable')
 const axios = Axios.create(axiosConf)
 
 // axiosConf.httpsAgent = undefined
