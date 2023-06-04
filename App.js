@@ -86,7 +86,6 @@ async function task() {
             let title, desc, img, price, canBuyTime, vaildityPeriod
             // img = jQuery(el).find("img[class='preview']").map((i, el) => el.currentSrc).toArray()[0]
             img = jQuery(el).find("img[class='preview']").map((i, el) => el.attribs.src).toArray()[0]
-            img = node_url.resolve(url, img)
             title = jQuery(el).find('h1').text().trim()
             desc = jQuery(el).find("td:nth-child(2)").text()
             desc = (desc || '').replace(title, '').trim()
@@ -95,7 +94,7 @@ async function task() {
             price = jQuery(el).find('td:nth-child(6)').text()
             
             return { img, title, desc, canBuyTime,vaildityPeriod, price }
-        })
+        }).toArray().map(_ => ({ ..._, img: node_url.resolve(url, _.img) }))
         let oldJson = loadJson()
         let newBouns = bouns.filter(b => !oldJson.some(o => o.title === b.title))
         for (const n of newBouns) {
