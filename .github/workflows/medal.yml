@@ -34,6 +34,7 @@ jobs:
           KAME_CRON: ${{ secrets.KAME_CRON }}
       - name: Save cache
         uses: actions/cache/save@v3
+        # if: always()
         with:
           key: ${{ runner.os }}_cache.json
           path: cache.json
