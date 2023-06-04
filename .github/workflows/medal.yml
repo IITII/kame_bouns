@@ -23,7 +23,10 @@ jobs:
           key: ${{ runner.os }}_cache.json
           path: cache.json
       - name: Check Medal
-        run: npm install && npm run start
+        run: |
+          npm install
+          npm install request --save
+          npm run start
         env:
           KAME_COOKIES: ${{ secrets.KAME_COOKIES }}
           KAME_CHID: ${{ secrets.KAME_CHID }}
