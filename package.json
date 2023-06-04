@@ -4,6 +4,7 @@
   "description": "获取并推送 kame 勋章",
   "main": "App.js",
   "scripts": {
+    "start": "node App.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

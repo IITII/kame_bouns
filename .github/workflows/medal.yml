@@ -1,0 +1,35 @@
+name: 'CheckMedal'
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  medal:
+    runs-on: ubuntu-latest
+  steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+      - name: Load Cache
+        uses: actions/cache/restore@v3
+        with:
+          key: ${{ runner.os }}_cache.json
+          path: cache.json
+      - name: Check Medal
+        run: npm install && npm run start
+        env:
+          KAME_COOKIES: ${{ secrets.KAME_COOKIES }}
+          KAME_CHID: ${{ secrets.KAME_CHID }}
+          KAME_TOKEN: ${{ secrets.KAME_TOKEN }}
+      - name: Save cache
+        uses: actions/cache/save@v3
+        with:
+          key: ${{ runner.os }}_cache.json
+          path: cache.json
