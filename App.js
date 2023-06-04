@@ -99,7 +99,7 @@ async function task() {
         let newBouns = bouns.filter(b => !oldJson.some(o => o.title === b.title))
         for (const n of newBouns) {
             console.log(bouns);
-            let msg = `#名称 _${n.title}_\n#价格 ${n.price}\n#可购买时间 ${n.canBuyTime}\n#购买后有效期(天) ${n.vaildityPeriod}\n${n.desc} ${n.img}`
+            let msg = `#名称 ${n.title}\n#价格 ${n.price}\n#可购买时间 ${n.canBuyTime}\n#购买后有效期 ${n.vaildityPeriod}\n#预览图 ${n.img}\n${n.desc}`
             await tgNotify(msg)
             await sleep(1000)
         }
