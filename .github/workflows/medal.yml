@@ -31,6 +31,7 @@ jobs:
           KAME_COOKIES: ${{ secrets.KAME_COOKIES }}
           KAME_CHID: ${{ secrets.KAME_CHID }}
           KAME_TOKEN: ${{ secrets.KAME_TOKEN }}
+          KAME_CRON: ${{ secrets.KAME_CRON }}
       - name: Save cache
         uses: actions/cache/save@v3
         with:

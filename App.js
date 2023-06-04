@@ -65,7 +65,13 @@ async function tgNotify(text) {
     }
     axios.post(`https://api.telegram.org/bot${config.tg.token}/sendMessage`, params)
         .then(_ => console.log(`sent: ${text}`))
-        .catch(e => console.log(`tgNotify: ${e.message}`))
+        .catch(e => {
+            if (config.isCron) {
+                throw e
+            } else {
+                console.log(`tgNotify: ${e.message}`)
+            }
+        })
 }
 
 async function task() {
@@ -102,15 +108,21 @@ async function task() {
     }).catch(async e => {
         console.log(`task: ${e.message}`)
         await tgNotify(e.message)
+        if (config.isCron) {
+            throw e
+        }
         await sleep(1000)
     })
 }
 
 async function main() {
-    // setInterval(async () => {
-    //     await task()
-    // }, config.interval)
-    await task()
+    if (config.isCron) {
+        await task()
+    } else {
+    setInterval(async () => {
+        await task()
+    }, config.interval)
+    }
 }
 
 main()
