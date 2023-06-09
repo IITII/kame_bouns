@@ -5,6 +5,9 @@ on:
     - cron: '*/30 * * * *'
   workflow_dispatch:
 
+permissions:
+  actions: write
+
 jobs:
   medal:
     runs-on: ubuntu-latest
