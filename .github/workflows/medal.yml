@@ -5,8 +5,8 @@ on:
     - cron: '*/30 * * * *'
   workflow_dispatch:
 
-permissions:
-  actions: write
+permissions: write-all
+  # actions: write
 
 jobs:
   medal:
